@@ -57,11 +57,17 @@ class Tkinter():
         self.display_result(solution)
 
     def display_result(self, solution):
-    # Инициализация переменной result как строки
-        result = "Minimal Row Cover Solution (row indices):\n"
-        
-        # Преобразуем элементы solution в строки и объединяем их через запятую
-        result += ", ".join([str(sol) for sol in solution])  # Преобразуем индексы в строку с разделением запятыми
-        
-        # Выводим сообщение в окно с помощью messagebox
+        # Создаем строку для отображения матрицы
+        result = "Minimal Row Cover Solution:\n\n"
+
+        for i, row in enumerate(self.array):
+            if i in solution:  # Если строка входит в минимальное покрытие
+                result += ">>   " + "  ".join(map(str, row)) + "   <<\n"
+            else:
+                result += "     " + "  ".join(map(str, row)) + "\n"
+
+        # Добавляем список строк, которые входят в покрытие
+        result += "\nSelected rows (indices): " + ", ".join(map(str, solution))
+
+        # Отображаем результат в messagebox
         messagebox.showinfo("Solution", result)
